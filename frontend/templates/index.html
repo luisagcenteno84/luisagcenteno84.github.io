@@ -23,7 +23,10 @@
         <p class="status">{{ card.status }}</p>
         <h2>{{ card.title }}</h2>
         <p>{{ card.desc }}</p>
-        <a class="card-link" href="{{ card.url }}" target="_blank" rel="noopener noreferrer">Visit landing page</a>
+        <div class="preview-wrap">
+          <iframe class="preview-frame" src="{{ card.url }}" title="{{ card.embed_title }}" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        </div>
+        <a class="card-link" href="{{ card.url }}" target="_blank" rel="noopener noreferrer">Open app</a>
       </article>
       {% endfor %}
     </section>
