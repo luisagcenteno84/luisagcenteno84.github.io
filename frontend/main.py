@@ -35,27 +35,18 @@ async def api_test() -> Dict[str, Any]:
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request) -> HTMLResponse:
-    cards = [
+    apps = [
         {
             "title": "Sports Tracker",
-            "status": "Live",
-            "desc": "Track schedules, matchups, and game details in one place.",
             "url": "https://upcoming-sports-games-frontend-7ijtcmg2ca-uc.a.run.app/",
-            "embed_title": "Sports Tracker preview",
         },
         {
             "title": "Thoughts",
-            "status": "Live",
-            "desc": "Draft and publish short updates with clean formatting.",
             "url": "https://thoughts-publisher-frontend-cuutda4jvq-uc.a.run.app/",
-            "embed_title": "Thoughts preview",
         },
         {
             "title": "Task Org",
-            "status": "Live",
-            "desc": "Prioritize work with AI-assisted ranking and focus views.",
             "url": "https://task-priority-organizer-frontend-oucod7neda-uc.a.run.app/",
-            "embed_title": "Task Org preview",
         },
     ]
 
@@ -64,7 +55,8 @@ async def index(request: Request) -> HTMLResponse:
         {
             "request": request,
             "title": "Luis Centeno | App Portfolio",
-            "subtitle": "A curated collection of projects in active development",
-            "cards": cards,
+            "subtitle": "Pick an app below to load it in the live preview.",
+            "apps": apps,
+            "default_app": apps[0],
         },
     )

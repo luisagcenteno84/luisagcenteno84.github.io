@@ -14,40 +14,48 @@
     <section class="hero">
       <p class="tag">Portfolio</p>
       <h1>Luis Centeno | App Portfolio</h1>
-      <p class="subtitle">A curated collection of projects in active development</p>
+      <p class="subtitle">Pick an app below to load it in the live preview.</p>
     </section>
 
-    <section class="grid">
-      <article class="card">
-        <p class="status">Live</p>
-        <h2>Sports Tracker</h2>
-        <p>Track schedules, matchups, and game details in one place.</p>
-        <div class="preview-wrap">
-          <iframe class="preview-frame" src="https://upcoming-sports-games-frontend-7ijtcmg2ca-uc.a.run.app/" title="Sports Tracker preview" loading="lazy" referrerpolicy="no-referrer"></iframe>
-        </div>
-        <a class="card-link" href="https://upcoming-sports-games-frontend-7ijtcmg2ca-uc.a.run.app/" target="_blank" rel="noopener noreferrer">Open app</a>
-      </article>
+    <section class="switcher" aria-label="App selector">
+      <button class="app-btn is-active" data-url="https://upcoming-sports-games-frontend-7ijtcmg2ca-uc.a.run.app/" data-title="Sports Tracker">Sports Tracker</button>
+      <button class="app-btn" data-url="https://thoughts-publisher-frontend-cuutda4jvq-uc.a.run.app/" data-title="Thoughts">Thoughts</button>
+      <button class="app-btn" data-url="https://task-priority-organizer-frontend-oucod7neda-uc.a.run.app/" data-title="Task Org">Task Org</button>
+    </section>
 
-      <article class="card">
-        <p class="status">Live</p>
-        <h2>Thoughts</h2>
-        <p>Draft and publish short updates with clean formatting.</p>
-        <div class="preview-wrap">
-          <iframe class="preview-frame" src="https://thoughts-publisher-frontend-cuutda4jvq-uc.a.run.app/" title="Thoughts preview" loading="lazy" referrerpolicy="no-referrer"></iframe>
-        </div>
-        <a class="card-link" href="https://thoughts-publisher-frontend-cuutda4jvq-uc.a.run.app/" target="_blank" rel="noopener noreferrer">Open app</a>
-      </article>
-
-      <article class="card">
-        <p class="status">Live</p>
-        <h2>Task Org</h2>
-        <p>Prioritize work with AI-assisted ranking and focus views.</p>
-        <div class="preview-wrap">
-          <iframe class="preview-frame" src="https://task-priority-organizer-frontend-oucod7neda-uc.a.run.app/" title="Task Org preview" loading="lazy" referrerpolicy="no-referrer"></iframe>
-        </div>
-        <a class="card-link" href="https://task-priority-organizer-frontend-oucod7neda-uc.a.run.app/" target="_blank" rel="noopener noreferrer">Open app</a>
-      </article>
+    <section class="embed-shell">
+      <div class="embed-header">
+        <h2 id="embedTitle">Sports Tracker</h2>
+      </div>
+      <iframe
+        id="appFrame"
+        class="app-frame"
+        src="https://upcoming-sports-games-frontend-7ijtcmg2ca-uc.a.run.app/"
+        title="Sports Tracker"
+        loading="eager"
+        referrerpolicy="no-referrer"
+      ></iframe>
     </section>
   </main>
+
+  <script>
+    const buttons = document.querySelectorAll('.app-btn');
+    const frame = document.getElementById('appFrame');
+    const title = document.getElementById('embedTitle');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const nextUrl = btn.dataset.url;
+        const nextTitle = btn.dataset.title;
+
+        frame.src = nextUrl;
+        frame.title = nextTitle;
+        title.textContent = nextTitle;
+
+        buttons.forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+      });
+    });
+  </script>
 </body>
 </html>

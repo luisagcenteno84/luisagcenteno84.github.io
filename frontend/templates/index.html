@@ -17,19 +17,45 @@
       <p class="subtitle">{{ subtitle }}</p>
     </section>
 
-    <section class="grid">
-      {% for card in cards %}
-      <article class="card">
-        <p class="status">{{ card.status }}</p>
-        <h2>{{ card.title }}</h2>
-        <p>{{ card.desc }}</p>
-        <div class="preview-wrap">
-          <iframe class="preview-frame" src="{{ card.url }}" title="{{ card.embed_title }}" loading="lazy" referrerpolicy="no-referrer"></iframe>
-        </div>
-        <a class="card-link" href="{{ card.url }}" target="_blank" rel="noopener noreferrer">Open app</a>
-      </article>
+    <section class="switcher" aria-label="App selector">
+      {% for app in apps %}
+      <button class="app-btn{% if loop.index0 == 0 %} is-active{% endif %}" data-url="{{ app.url }}" data-title="{{ app.title }}">{{ app.title }}</button>
       {% endfor %}
     </section>
+
+    <section class="embed-shell">
+      <div class="embed-header">
+        <h2 id="embedTitle">{{ default_app.title }}</h2>
+      </div>
+      <iframe
+        id="appFrame"
+        class="app-frame"
+        src="{{ default_app.url }}"
+        title="{{ default_app.title }}"
+        loading="eager"
+        referrerpolicy="no-referrer"
+      ></iframe>
+    </section>
   </main>
+
+  <script>
+    const buttons = document.querySelectorAll('.app-btn');
+    const frame = document.getElementById('appFrame');
+    const title = document.getElementById('embedTitle');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const nextUrl = btn.dataset.url;
+        const nextTitle = btn.dataset.title;
+
+        frame.src = nextUrl;
+        frame.title = nextTitle;
+        title.textContent = nextTitle;
+
+        buttons.forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+      });
+    });
+  </script>
 </body>
 </html>
